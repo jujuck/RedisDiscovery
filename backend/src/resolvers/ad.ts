@@ -15,7 +15,7 @@ class AdResolver {
       const dbResult = await Ad.find({
         where: { description: ILike(`%${keyword}%`) },
       });
-      redisClient.set(keyword, JSON.stringify(dbResult));
+      redisClient.set(keyword, JSON.stringify(dbResult), { EX: 30 });
       return dbResult;
     }
   }

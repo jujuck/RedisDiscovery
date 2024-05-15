@@ -4,8 +4,19 @@ import { buildSchema } from "type-graphql";
 import dataSource from "./config";
 import AdResolver from "./resolvers/ad";
 import Ad from "./entity/ad";
+import { createClient } from "redis";
+
+export const redisClient = createClient({ url: "redis://redis" });
+
+redisClient.on("error", (err) => {
+  console.log("Redis Client Error", err);
+});
+redisClient.on("connect", () => {
+  console.log("redis connected");
+});
 
 const start = async () => {
+  await redisClient.connect();
   await dataSource.initialize();
 
   const adsCount = await Ad.count();

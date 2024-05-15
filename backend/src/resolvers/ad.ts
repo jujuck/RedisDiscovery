@@ -1,6 +1,6 @@
 import { ILike } from "typeorm";
 import Ad from "../entity/ad";
-import { Arg, Query, Resolver } from "type-graphql";
+import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import { redisClient } from "../index";
 
 @Resolver()
@@ -18,6 +18,14 @@ class AdResolver {
       redisClient.set(keyword, JSON.stringify(dbResult));
       return dbResult;
     }
+  }
+
+  @Mutation(() => Ad)
+  async createNewAd(
+    @Arg("title") title: string,
+    @Arg("description") description: string
+  ) {
+    return await Ad.save({ title, description });
   }
 }
 export default AdResolver;

@@ -1,21 +1,10 @@
 services:
   backend:
-    build: ./backend
+    build: ./server
     volumes:
-      - ./backend/src:/app/src
-    depends_on:
-      db:
-        condition: service_healthy
+      - ./server/src:/app/src
     ports:
       - 4000:4000
-  db:
-    image: postgres
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -d postgres -U postgres"]
-      interval: 1s
-      timeout: 2s
-    environment:
-      POSTGRES_PASSWORD: example
   redis:
     image: redis
   redis-commander:

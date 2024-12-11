@@ -35,10 +35,10 @@ redisClient.on("connect", () => {
 export default redisClient;
 ```
 
-**_ 1 _** : la proriété `url` indique l'adresse du serveur Redis de connection. Le préfixe `redis://` indique que nous utilisons le protocole redis. L'autre `redis` qui suit, indique le nom du container Docker (cf Docker compose).
+:bulb: **_1_** : la proriété `url` indique l'adresse du serveur Redis de connection. Le préfixe `redis://` indique que nous utilisons le protocole redis. L'autre `redis` qui suit, indique le nom du container Docker (cf Docker compose).
 D'autres propriétés sont possibles pour affiner nos paramètrages selon notre utilisation (name 'si plusieurs instances', socket, username et password en cas de mise en place d'une connexion sur l'instance, ...).
 
-**_ 2 _** : La méthode `on` permet d'écouter des évènements spécifiques émis par `redis`. Cette méthode courante sur `node.js` permet de gérer des évenements asynchrone via des callbacks. D'autres évènements peuvent être écoutés selon nos besoins ("ready", "end", "close", "reconnecting"...)
+:bulb: **_2_** : La méthode `on` permet d'écouter des évènements spécifiques émis par `redis`. Cette méthode courante sur `node.js` permet de gérer des évenements asynchrone via des callbacks. D'autres évènements peuvent être écoutés selon nos besoins ("ready", "end", "close", "reconnecting"...)
 
 ### Connecter notre app à la BDD Redis dans l'`index.ts`
 
@@ -62,7 +62,7 @@ redisClient.set(keyword, JSON.stringify(result)); // * 3
 return result;
 ```
 
-**_ 3 _** : La méthode `set` est utilisée pour enregistrer dans notre base de données `Redis`. Cette base fonctionne sur le principe de clé - valeur. On fournit donc en premier argument une clé (de type String) et une valeur, (de type String aussi). Chaque clé doit restée unique.
+:bulb: **_3_** : La méthode `set` est utilisée pour enregistrer dans notre base de données `Redis`. Cette base fonctionne sur le principe de clé - valeur. On fournit donc en premier argument une clé (de type String) et une valeur, (de type String aussi). Chaque clé doit restée unique.
 
 ### Vérifier le cache par le mot clé avant de chercher à faire une requete (avant le `await sleep()`)
 
@@ -75,9 +75,9 @@ await sleep()
 ...
 ```
 
-**_ 4 _** : La méthode `get` de redis retourne une promesse. Nous devons donc l'utiliser après un `await`. Cette méthode retourne la valeur, si il y en a une correspondant à notre clé (keyword).
+:bulb: **_4_** : La méthode `get` de redis retourne une promesse. Nous devons donc l'utiliser après un `await`. Cette méthode retourne la valeur, si il y en a une correspondant à notre clé (keyword).
 
-**_ 5 _** : Si une réponse (cache) est retournée par notre BDD redis, alors nous retournons directement ce résultat, sans avoir besoin de consulter notre BDD (PostGres, SQlite, MySQL) et entrer dans notre logique métier.
+:bulb: **_5_** : Si une réponse (cache) est retournée par notre BDD redis, alors nous retournons directement ce résultat, sans avoir besoin de consulter notre BDD (PostGres, SQlite, MySQL) et entrer dans notre logique métier.
 
 - Maintenant, tu peux tester ton application via le code SandBox d'apollo. Lorsque tu testes une requête pour la première fois, le temps de réponse est long. Mais, une fois le résultat de la requête méméorise par redis, la deuxième tentative est instantannée. C'est ce qu'il va se passer sur ton serveur si plusieurs utilisateurs demandent une même requete. Le premier va la lancer et les suivants accéderont au résultat en mémoire.
 
@@ -103,7 +103,7 @@ await sleep()
 redisClient.set(keyword, JSON.stringify(result), { EX: 30 }); // *6
 ```
 
-**_ 6 _** : la méthode `set` de redis peut avoir 4 arguments
+:bulb: **_6_** : la méthode `set` de redis peut avoir 4 arguments
 
 - key: string
 - payload: string

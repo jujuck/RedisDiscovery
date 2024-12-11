@@ -97,7 +97,9 @@ await sleep()
   Une fois que Redis a fait une association avec une data (`keywords` => `result`). Celui ci n'est pas remis en cause pas la modification de données, car Redis n'a aucun moyen de le savoir.
   Pour cela, on va donner une espérance de vie à notre mots clés dans le cache (celle ci varie en fonction de notre application, de la fréquence des changments et de l'importance pour notre utilisateur d'avoir des données 100% à jour)
 
-### Améliorer le code en gérant la mise à jour du cache (durée de vie de 30 secondes). Attention, il sera important de réinitialiser le cache pour que les changements soient pris en compte. Pour cela, pense à relancer Docker et refaire la manipulation d'ajout d'entrée.
+### Améliorer le code en gérant la mise à jour du cache (durée de vie de 30 secondes).\*\*
+
+Attention, il sera important de réinitialiser le cache pour que les changements soient pris en compte. Pour cela, pense à relancer Docker et refaire la manipulation d'ajout d'entrée. (N'hésites pas à prune ton systeme)
 
 ```ts
 redisClient.set(keyword, JSON.stringify(result), { EX: 30 }); // *6

@@ -3,7 +3,7 @@ import Ad from "../type/ad";
 export const ads: Ad[] = [
   {
     id: 1,
-    title: "Fantastic Fresh Shoes",
+    title: "Wilders",
     description:
       "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
   },

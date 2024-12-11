@@ -24,7 +24,9 @@ class AdResolver {
     @Arg("title") title: string,
     @Arg("description") description: string
   ) {
-    return ads.push({ id: ++index, title, description });
+    const result = { id: ++index, title, description };
+    ads.push(result);
+    return result;
   }
 }
 export default AdResolver;
